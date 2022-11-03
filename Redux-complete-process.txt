@@ -1,0 +1,66 @@
+Action/index.js
+
+export const  increment = () => {type : "INCREMENT"}
+export const  decrement = () =>  {type: "DECREMENT"}
+
+
+Reducer/upDown.js
+const initialNumber = 0;
+
+const changeNumber = (state = initialState, action) =>{
+  switch(action.type){
+  case:"INCREMENT":return state + 1;
+  case:"DECREMENT":return state - 1;
+  default: return state;
+
+}
+
+export default changeTheNumber;
+
+
+//Reducer index.js
+
+import changeTheNumber from './upDown';
+
+import {combineReducers} from "redux";
+
+const rootReducer = combineReducers({
+         changeTheNumber
+         });
+
+export default rootRducer ;
+
+//Store.js
+import rootRducer from "./reducer/index";
+
+import { createStore } from "redux";
+const store = createStore { rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() };
+
+export default store ;
+
+
+idnex.js file
+
+
+import Store from "store";
+import {Provider} from "react-redux";
+
+store.subscribe(() => console.log(store.getState()));
+
+
+<Provider store={store}>
+</App>
+</Provider>
+
+
+//App.js
+
+import {useSelector, useDispatch} from "react-redux";
+import {incNumber,decNumer}  from "./actions/index";
+
+
+const myState = useSelector((state) => state.changeTheNumber);
+
+const dispatch = useDispatch();
+onClick = { () => dispatch(decNumber()) }
+onClick = { () => dispatch(incNumber()) }
